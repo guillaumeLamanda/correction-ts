@@ -1,10 +1,12 @@
-import data from './data.json'
-import { Rule } from "./Rule/Rule";
+import { Rule, RuleProps } from "./Rule/Rule";
 
-export default function RuleList() {
+type RuleListProps = {
+  rules: RuleProps[]
+}
+export default function RuleList({rules}: RuleListProps) {
   return (
     <div>
-      {data.map(rule => (
+      {rules.map(rule => (
         <Rule key={rule.id} {...rule} />
       ))}
     </div>

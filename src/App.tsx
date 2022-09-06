@@ -1,25 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useMemo } from 'react';
 import './App.css';
+import RuleList from './RuleList';
+import { useRules } from './useRules';
+
+export const delay = (ms: number) => (data: any) => new Promise(resolve => setTimeout(resolve, ms))
 
 function App() {
+  const rules = useRules()
+  if (rules.length === 0) {
+    return <p>loading...</p>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RuleList rules={rules} />
   );
 }
 

@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import RuleList from './RuleList';
 
- const reactElement = <RuleList />
+ const reactElement = <App />
 const domElement = document.getElementById('root');
 const root = ReactDOM.createRoot(domElement!);
 root.render(reactElement);

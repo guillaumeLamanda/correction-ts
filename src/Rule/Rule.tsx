@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import PropTypes from 'prop-types'
 import './Rule.css'
 
-type RuleProps = {
+export type RuleProps = {
   "id": number;
   "title": string;
   "description"?: string;
