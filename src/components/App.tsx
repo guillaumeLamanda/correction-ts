@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
 import './App.css';
 import RuleList from './RuleList';
-import { useRules } from './useRules';
+import { useRules } from '../hooks/useRules';
+import { RoleProvider } from '../contexts/RoleContext';
+import { Header } from './Header';
 
 export const delay = (ms: number) => (data: any) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -11,7 +12,10 @@ function App() {
     return <p>loading...</p>
   }
   return (
-    <RuleList rules={rules} />
+    <RoleProvider>
+      <Header />
+      <RuleList rules={rules} />
+    </RoleProvider>
   );
 }
 

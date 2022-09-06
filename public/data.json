@@ -5,6 +5,7 @@
     "description": "In 2014, 50% of worldwide traffic uses mobile. A website must adapt the content for mobile.",
     "likes": 0,
     "dislikes": 0,
+    "status": "validated",
     "tags": ["ui"]
   },
   {
@@ -12,6 +13,7 @@
     "title": "Leave the code cleaner than you found it.",
     "description": "From Clean Code: always leave the code cleaner than it was before.",
     "likes": 0,
+    "status": "pending",
     "dislikes": 0,
     "tags": ["craftsmanship", "clean code"]
   }

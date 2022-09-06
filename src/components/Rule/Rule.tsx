@@ -10,6 +10,7 @@ export type RuleProps = {
   "description"?: string;
   "likes": number;
   "dislikes": number;
+  "status": "validated"| "pending" | "rejected"
   "tags": string[];
 
 };

@@ -5,6 +5,7 @@
     "title": "Never say : \"I've done, it works on my machine !\" #itworksonmymachine",
     "likes": 0,
     "dislikes": 0,
+    "status": "validated",
     "tags": []
   },
   {
@@ -12,6 +13,7 @@
     "title": "Always use === in JavaScript!",
     "likes": 0,
     "dislikes": 0,
+    "status": "rejected",
     "tags": ["javascript"]
   }
 ]

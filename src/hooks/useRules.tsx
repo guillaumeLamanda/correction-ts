@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { RuleProps } from './Rule/Rule';
-import { delay } from './App';
+import { RuleProps } from '../components/Rule/Rule';
+import { delay } from '../components/App';
 
 export function useRules() {
   const [rules, setrules] = useState<RuleProps[]>([]);
@@ -9,7 +9,7 @@ export function useRules() {
     async function getRules(url: string): Promise<RuleProps[]> {
       const data = await fetch(url);
       const json = await data.json();
-      await delay(3000)(json);
+      await delay(0)(json);
       return json;
     }
 
