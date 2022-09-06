@@ -9,7 +9,7 @@ export function useRules() {
     async function getRules(url: string): Promise<RuleProps[]> {
       const data = await fetch(url);
       const json = await data.json();
-      await delay(0)(json);
+      await delay(1000)(json);
       return json;
     }
 
