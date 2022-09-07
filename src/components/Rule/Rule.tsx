@@ -1,11 +1,11 @@
-import { faChevronDown, faPencil, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useState } from "react";
-import PropTypes from 'prop-types'
 import './Rule.css'
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { like as likeAction, dislike as dislikeAction } from "../../store/rules.store";
+import { LikeButton } from "./LikeButton";
 
 export type RuleProps = {
   "id": number;
@@ -60,19 +60,3 @@ items-center rounded-t" onClick={() => setFolded(previousValue => !previousValue
   )
 };
 
-type LikeButtonProps = {
-  value: number;
-  direction: "increment" | "decrement"
-  onClick: () => void
-
-}
-function LikeButton(props: LikeButtonProps) {
-  return <button onClick={props.onClick} type="button" className="border p-4" title={props.direction === "increment" ? "+1" : "-1"}>
-    {props.value}
-    <FontAwesomeIcon icon={props.direction === 'increment' ? faThumbsUp : faThumbsDown} />
-  </button>;
-}
-
-LikeButton.propTypes = {
-  direction: PropTypes.oneOf(["increment", "decrement"]),
-}

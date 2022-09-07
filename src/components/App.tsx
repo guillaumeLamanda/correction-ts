@@ -6,6 +6,9 @@ import { Header } from './Header';
 import { BrowserRouter, Outlet, Route, Routes, useParams } from 'react-router-dom';
 import { Menu } from './Menu';
 import { RuleProps } from './Rule/Rule';
+import { Form, FormikProvider, Field, useFormik } from 'formik'
+import { useDispatch } from 'react-redux';
+import { updateRule } from '../store/rules.store';
 
 export const delay = (ms: number) => (data: any) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -24,14 +27,37 @@ function useRule(id: number): RuleProps | undefined {
   return rules.find(r => r.id === id)
 }
 
-function RuleForm () {
-  const params = useParams<{id: string}>()
+
+type FormData = Pick<RuleProps, 'title' | 'description'>
+
+function RuleForm() {
+  const params = useParams<{ id: string }>()
   const rule = useRule(Number(params.id))
+  const dispatch = useDispatch()
+  
+
+  const form = useFormik<FormData>({
+    initialValues:  {
+      title: rule?.title ?? '',
+      description: rule?.description ?? ''
+    },
+    onSubmit: (values) => {
+      if(rule) {
+        dispatch(updateRule({...rule, ...values}))
+      }
+
+
+    }
+  })
 
   return (
-    <form>
-      <input className='border rounded m-4 p-4 shadow-lg' defaultValue={rule?.title} />
-    </form>
+    <FormikProvider value={form}>
+      <Form className='flex flex-col p-10 max-w-md gap-6 '>
+        <Field name='title' component='input' className='rounded borded border-2 border-blue-100 hover:border-blue-500 transition-all duration-500' />
+        <Field name='description' className='rounded borded border-2 border-blue-100 hover:border-blue-500 transition-all duration-500' />
+        <button type='submit'>Submit</button>
+      </Form>
+    </FormikProvider>
   )
 }
 
