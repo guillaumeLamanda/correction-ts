@@ -4,6 +4,8 @@ import { FC, useState } from "react";
 import PropTypes from 'prop-types'
 import './Rule.css'
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { like as likeAction, dislike as dislikeAction } from "../../store/rules.store";
 
 export type RuleProps = {
   "id": number;
@@ -11,13 +13,22 @@ export type RuleProps = {
   "description"?: string;
   "likes": number;
   "dislikes": number;
-  "status": "validated"| "pending" | "rejected"
+  "status": "validated" | "pending" | "rejected"
   "tags": string[];
 
 };
 export const Rule: FC<RuleProps> = (props) => {
   const [folded, setFolded] = useState(!Boolean(props.description))
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const like = () => {
+    dispatch(likeAction(props))
+
+  }
+  const dislike = () => {
+    dispatch(dislikeAction(props))
+
+  }
 
   return (
     <section className="rule">
@@ -34,14 +45,14 @@ items-center rounded-t" onClick={() => setFolded(previousValue => !previousValue
           ))}
         </div>
         <div className="flex justify-end">
-          <button type="button" onClick={()=>{
+          <button type="button" onClick={() => {
             navigate(`/edit/${props.id}`)
           }} className="bg-blue-400 p-4 rounded text-xl">
             <FontAwesomeIcon icon={faPencil} />
           </button>
           <div className="flex">
-            <LikeButton value={props.likes} direction='increment' />
-            <LikeButton value={props.dislikes} direction='decrement' />
+            <LikeButton onClick={like} value={props.likes} direction='increment' />
+            <LikeButton onClick={dislike} value={props.dislikes} direction='decrement' />
           </div>
         </div>
       </footer>
@@ -49,19 +60,19 @@ items-center rounded-t" onClick={() => setFolded(previousValue => !previousValue
   )
 };
 
-type LikeButtonProps =  {
+type LikeButtonProps = {
   value: number;
   direction: "increment" | "decrement"
+  onClick: () => void
 
 }
 function LikeButton(props: LikeButtonProps) {
-  const [likes, setLikes] = useState(props.value)
-  return <button onClick={() => setLikes(likes + 1)} type="button" className="border p-4" title={props.direction === "increment" ? "+1" : "-1"}>
-    {likes}
+  return <button onClick={props.onClick} type="button" className="border p-4" title={props.direction === "increment" ? "+1" : "-1"}>
+    {props.value}
     <FontAwesomeIcon icon={props.direction === 'increment' ? faThumbsUp : faThumbsDown} />
   </button>;
 }
 
- LikeButton.propTypes = {
+LikeButton.propTypes = {
   direction: PropTypes.oneOf(["increment", "decrement"]),
 }

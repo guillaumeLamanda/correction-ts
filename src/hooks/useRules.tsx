@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect,  } from 'react';
 import { RuleProps } from '../components/Rule/Rule';
 import { delay } from '../components/App';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRules, getRules } from '../store/rules.store';
 
 export function useRules() {
-  const [rules, setrules] = useState<RuleProps[]>([]);
+  const rules = useSelector(getRules)
+
+  const dispatch = useDispatch()
+
+  const setRules = (rules: RuleProps[]) => {
+    dispatch(addRules(rules))
+  }
 
   useEffect(() => {
     async function getRules(url: string): Promise<RuleProps[]> {
@@ -16,7 +24,8 @@ export function useRules() {
     Promise.all([
       getRules("/data.json"),
       getRules("/data2.json")
-    ]).then(([data, data2]) => setrules([...data, ...data2]));
+    ]).then(([data, data2]) => setRules([...data, ...data2]));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return rules;

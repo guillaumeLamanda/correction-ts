@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './store/rules.store';
 
- const reactElement = <App />
+const reactElement = <ReduxProvider store={store}>
+  <App />
+</ReduxProvider> 
 const domElement = document.getElementById('root');
 const root = ReactDOM.createRoot(domElement!);
 root.render(reactElement);

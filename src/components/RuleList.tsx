@@ -1,12 +1,11 @@
 import { useContext, useMemo } from "react";
 import { RoleContext } from "../contexts/RoleContext";
-import { Rule, RuleProps } from "./Rule/Rule";
+import { useRules } from "../hooks/useRules";
+import { Rule  } from "./Rule/Rule";
 
-type RuleListProps = {
-  rules: RuleProps[]
-}
-export default function RuleList({ rules }: RuleListProps) {
+export default function RuleList() {
   const { role } = useContext(RoleContext)
+  const rules = useRules()
   const filteredRules = useMemo(() => 
     rules.filter(rule => rule.status === 'validated' || role === 'admin'),
     [rules, role]

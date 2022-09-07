@@ -36,16 +36,12 @@ function RuleForm () {
 }
 
 function App() {
-  const rules = useRules()
-  if (rules.length === 0) {
-    return <p>loading...</p>
-  }
   return (
     <RoleProvider>
       <BrowserRouter>
         <Routes>
           <Route path='' element={<Layout />}>
-            <Route path='/' element={<RuleList rules={rules} />} />
+            <Route path='/' element={<RuleList />} />
             <Route path='/new' element={<RuleForm />} />
             <Route path='/edit/:id' element={<RuleForm />} />
           </Route>
